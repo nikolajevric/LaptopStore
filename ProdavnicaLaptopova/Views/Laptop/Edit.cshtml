@@ -1,0 +1,36 @@
+﻿@model ProdavnicaLaptopova.Models.LaptopBO
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="control-label">Proizvodjac</label>
+                    @Html.EditorFor(bo => bo.Proizvodjac, new { HtmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(bo => bo.Proizvodjac, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    <label class="control-label">Model</label>
+                    @Html.EditorFor(model => model.Model, new { HtmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-3">
+                    <label class="control-label">Cena</label>
+                    @Html.EditorFor(model => model.Cena, new { HtmlAttributes = new { @class = "form-control" } })
+                </div>
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Sacuvaj promene" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
