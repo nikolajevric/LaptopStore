@@ -13,7 +13,6 @@ namespace ProdavnicaLaptopova.Models.Interfaces
         LaptopBO GetById(int LaptopID);
         void Delete(int LaptopID);
         void update(LaptopBO laptopBo);
-        void requestNewLaptop(LaptopBO laptopBo);
-
+        void kreirajRacun(int laptopId);
     }
 }

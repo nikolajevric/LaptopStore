@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProdavnicaLaptopova.Models.LaptopBO>
+
+@{
+    ViewBag.Title = "Racun";
+}
+
+<h2>Racun</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LaptopID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proizvodjac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaptopID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proizvodjac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+    </tr>
+}
+
+</table>

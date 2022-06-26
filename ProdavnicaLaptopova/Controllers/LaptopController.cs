@@ -57,5 +57,11 @@ namespace ProdavnicaLaptopova.Controllers
             ilaptop.Delete(LaptopID);
             return RedirectToAction("Index");
         }
+        public ActionResult Racun(int id)
+        {
+            List<LaptopBO> laptopovi = new List<LaptopBO>();
+            laptopovi.Add(ilaptop.GetById(id));
+            return View("Racun", laptopovi);
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace ProdavnicaLaptopova.Models.EFRepository
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Laptop
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,7 @@ namespace ProdavnicaLaptopova.Models.EFRepository
             this.Magacin = new HashSet<Magacin>();
             this.Racun = new HashSet<Racun>();
         }
-    
+        
         public int LaptopID { get; set; }
         public string Proizvodjac { get; set; }
         public string Model { get; set; }

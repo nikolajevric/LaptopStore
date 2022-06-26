@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<ProdavnicaLaptopova.Models.EFRepository.Laptop>
-@{
-    ViewBag.Title = "Index";
-}
+@{ ViewBag.Title = "Index"; }
 
-<h2>Prikaz Laptopova</h2><br />
+<h2>Prikaz Laptopova</h2>
+<br />
 <div class="form-group">
     @Html.ActionLink("Unos novog laptopa", "Add", "Laptop")
 </div>
@@ -12,17 +11,22 @@
         <div class="list-group">
             @foreach (var laptop in Model)
             {
-                <p>
-                    <a class="list-group-item">
-                        @Html.DisplayFor(model => laptop.Proizvodjac) @Html.DisplayFor(model => laptop.Model)
-                    </a>
-                    <table>
-                        <tr><td>@Html.ActionLink("Obrisi", "Delete", new { LaptopID = laptop.LaptopID })</td><td style="padding-left:30px">@Html.ActionLink("Azuriraj", "Edit", new { LaptopID = laptop.LaptopID })</td></tr>
-                    </table>
-                </p>
-            }
+<p>
+    <a class="list-group-item">
+        @Html.DisplayFor(model => laptop.Proizvodjac) @Html.DisplayFor(model => laptop.Model)
+    </a>
+    <table>
+        <tr>
+            <td>@Html.ActionLink("Obrisi", "Delete", new { LaptopID = laptop.LaptopID })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Azuriraj", "Edit", new { LaptopID = laptop.LaptopID })</td>
+            <td style="padding-left:30px">@Html.ActionLink("Kupi", "Racun", new {  id = laptop.LaptopID })</td>
+        </tr>
+    </table>
+</p>            }
         </div>
     </div>
 </div>
+<br />
+<br />
 
 

@@ -8,7 +8,7 @@ namespace ProdavnicaLaptopova.Models.EFRepository
 {
     public class LaptopRepository : ILaptop
     {
-        private ProdavnicaLaptopovaEntities le = new ProdavnicaLaptopovaEntities();
+        public ProdavnicaLaptopovaEntities le = new ProdavnicaLaptopovaEntities();
         public void Add(LaptopBO laptop)
         {
             Laptop dbLaptop = new Laptop();
@@ -32,7 +32,7 @@ namespace ProdavnicaLaptopova.Models.EFRepository
         public List<LaptopBO> GetAll()
         {
             List<LaptopBO> laptop = new List<LaptopBO>();
-            foreach(Laptop l in le.Laptop)
+            foreach (Laptop l in le.Laptop)
             {
                 LaptopBO laptopBO = new LaptopBO()
                 {
@@ -58,9 +58,10 @@ namespace ProdavnicaLaptopova.Models.EFRepository
             return laptopBO;
         }
 
-        public void requestNewLaptop(LaptopBO laptopBo)
+        public void kreirajRacun(int laptopId)
         {
-            throw new NotImplementedException();
+            Laptop laptop = le.Laptop.FirstOrDefault(l => l.LaptopID == laptopId);
+
         }
 
         public void update(LaptopBO laptopBo)
@@ -73,7 +74,7 @@ namespace ProdavnicaLaptopova.Models.EFRepository
             try
             {
                 le.SaveChanges();
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;
