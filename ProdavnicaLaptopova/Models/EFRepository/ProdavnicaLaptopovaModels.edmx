@@ -4,15 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProdavnicaLaptopovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Korisnik">
-          <Key>
-            <PropertyRef Name="KorisnikID" />
-          </Key>
-          <Property Name="KorisnikID" Type="int" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="ProdavnicaLaptopovaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Laptop">
           <Key>
             <PropertyRef Name="LaptopID" />
@@ -40,6 +32,13 @@
           <Property Name="Storniran" Type="int" />
           <Property Name="LaptopID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -56,6 +55,24 @@
           </Key>
           <Property Name="UnosUMagacinID" Type="int" Nullable="false" />
           <Property Name="BarKod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Username" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RoleID" Type="int" />
         </EntityType>
         <Association Name="FK_Magacin_Laptop">
           <End Role="Laptop" Type="Self.Laptop" Multiplicity="1" />
@@ -93,13 +110,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ProdavnicaLaptopovaModelStoreContainer">
-          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Laptop" EntityType="Self.Laptop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Magacin" EntityType="Self.Magacin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Racun" EntityType="Self.Racun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnosUMagacin" EntityType="Self.UnosUMagacin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Magacin_Laptop" Association="Self.FK_Magacin_Laptop">
             <End Role="Laptop" EntitySet="Laptop" />
             <End Role="Magacin" EntitySet="Magacin" />
@@ -112,20 +155,19 @@
             <End Role="Laptop" EntitySet="Laptop" />
             <End Role="Racun" EntitySet="Racun" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProdavnicaLaptopovaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Korisnik">
-          <Key>
-            <PropertyRef Name="KorisnikID" />
-          </Key>
-          <Property Name="KorisnikID" Type="Int32" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Laptop">
           <Key>
             <PropertyRef Name="LaptopID" />
@@ -213,7 +255,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProdavnicaLaptopovaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" />
           <EntitySet Name="Laptop" EntityType="Self.Laptop" />
           <EntitySet Name="Magacin" EntityType="Self.Magacin" />
           <EntitySet Name="Racun" EntityType="Self.Racun" />
@@ -231,22 +272,77 @@
             <End Role="UnosUMagacin" EntitySet="UnosUMagacin" />
             <End Role="Magacin" EntitySet="Magacin" />
           </AssociationSet>
+          <EntitySet Name="Role" EntityType="ProdavnicaLaptopovaModel.Role" />
+          <EntitySet Name="User" EntityType="ProdavnicaLaptopovaModel.User" />
+          <EntitySet Name="UserRole" EntityType="ProdavnicaLaptopovaModel.UserRole" />
+          <AssociationSet Name="FK_UserRole_Role" Association="ProdavnicaLaptopovaModel.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="ProdavnicaLaptopovaModel.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRole" Relationship="ProdavnicaLaptopovaModel.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRole" Relationship="ProdavnicaLaptopovaModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="ProdavnicaLaptopovaModel.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="ProdavnicaLaptopovaModel.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserRole_Role">
+          <End Type="ProdavnicaLaptopovaModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="ProdavnicaLaptopovaModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Type="ProdavnicaLaptopovaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ProdavnicaLaptopovaModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProdavnicaLaptopovaModelStoreContainer" CdmEntityContainer="ProdavnicaLaptopovaEntities">
-          <EntitySetMapping Name="Korisnik">
-            <EntityTypeMapping TypeName="ProdavnicaLaptopovaModel.Korisnik">
-              <MappingFragment StoreEntitySet="Korisnik">
-                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Laptop">
             <EntityTypeMapping TypeName="ProdavnicaLaptopovaModel.Laptop">
               <MappingFragment StoreEntitySet="Laptop">
@@ -292,6 +388,34 @@
               <MappingFragment StoreEntitySet="UnosUMagacin">
                 <ScalarProperty Name="UnosUMagacinID" ColumnName="UnosUMagacinID" />
                 <ScalarProperty Name="BarKod" ColumnName="BarKod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ProdavnicaLaptopovaModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ProdavnicaLaptopovaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="ProdavnicaLaptopovaModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

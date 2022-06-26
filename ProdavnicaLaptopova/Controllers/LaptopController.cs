@@ -18,15 +18,20 @@ namespace ProdavnicaLaptopova.Controllers
         {
             ilaptop = new LaptopRepository();
         }*/
+        [Authorize]
         public ActionResult Index()
         {
             List<Laptop> laptopovi = le.Laptop.ToList();
             return View(laptopovi);
         }
+
+        [Authorize(Roles = "Magacioner")]
         public ActionResult Add()
         {
             return View("Add");
         }
+
+        [Authorize(Roles = "Magacioner")]
         [HttpPost]
         public ActionResult Add(LaptopBO laptop)
         {
@@ -34,11 +39,13 @@ namespace ProdavnicaLaptopova.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Prodavac, Magacioner")]
         public ActionResult Edit()
         {
             return View("Edit");
         }
 
+        [Authorize(Roles = "Prodavac, Magacioner")]
         [HttpPost]
         public ActionResult Edit(LaptopBO laptopBo)
         {
@@ -52,11 +59,14 @@ namespace ProdavnicaLaptopova.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Prodavac")]
         public ActionResult Delete(int LaptopID)
         {
             ilaptop.Delete(LaptopID);
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = "Kupac")]
         public ActionResult Racun(int id)
         {
             List<LaptopBO> laptopovi = new List<LaptopBO>();

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2aaff9ce993a4ea1ab2c478699ef886a" Name="Diagram1">
-        <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.Korisnik" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.Laptop" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.Magacin" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.Racun" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
@@ -14,6 +13,11 @@
         <AssociationConnector Association="ProdavnicaLaptopovaModel.FK_Magacin_Laptop" ManuallyRouted="false" />
         <AssociationConnector Association="ProdavnicaLaptopovaModel.FK_Racun_Laptop" ManuallyRouted="false" />
         <AssociationConnector Association="ProdavnicaLaptopovaModel.FK_Magacin_UnosUMagacin" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.Role" Width="1.5" PointX="5.375" PointY="11.25" />
+        <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.User" Width="1.5" PointX="5.375" PointY="7.875" />
+        <EntityTypeShape EntityType="ProdavnicaLaptopovaModel.UserRole" Width="1.5" PointX="7.625" PointY="8" />
+        <AssociationConnector Association="ProdavnicaLaptopovaModel.FK_UserRole_Role" />
+        <AssociationConnector Association="ProdavnicaLaptopovaModel.FK_UserRole_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

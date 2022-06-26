@@ -16,13 +16,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Prodavnica Laptopova", "Index", "Laptop", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Prodavnica Laptopova", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Laptopovi", "Index", "Laptop")</li>
+                        <li>@Html.ActionLink("Ubaci novi", "Add", "Laptop")</li>
+                        <li><a>Zdravo @User.Identity.Name</a></li>
+                        <li>@Html.ActionLink("Odjava", "Logout", "Account")</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Registracija", "Register", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>

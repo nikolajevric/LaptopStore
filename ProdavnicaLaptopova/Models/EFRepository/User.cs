@@ -15,37 +15,33 @@ namespace ProdavnicaLaptopova.Models.EFRepository
 using System;
     using System.Collections.Generic;
     
-public partial class Laptop
+public partial class User
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Laptop()
+    public User()
     {
 
-        this.Magacin = new HashSet<Magacin>();
-
-        this.Racun = new HashSet<Racun>();
+        this.UserRole = new HashSet<UserRole>();
 
     }
 
 
-    public int LaptopID { get; set; }
+    public int UserID { get; set; }
 
-    public string Proizvodjac { get; set; }
+    public string Email { get; set; }
 
-    public string Model { get; set; }
+    public string Password { get; set; }
 
-    public double Cena { get; set; }
+    public Nullable<bool> IsActive { get; set; }
+
+    public string Username { get; set; }
 
 
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Magacin> Magacin { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Racun> Racun { get; set; }
+    public virtual ICollection<UserRole> UserRole { get; set; }
 
 }
 

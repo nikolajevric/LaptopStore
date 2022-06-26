@@ -128,14 +128,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaptopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\EFRepository\Korisnik.cs">
-      <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\EFRepository\AuthRepository.cs" />
     <Compile Include="Models\EFRepository\Laptop.cs">
       <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
     </Compile>
@@ -161,12 +160,22 @@
     <Compile Include="Models\EFRepository\Racun.cs">
       <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFRepository\Role.cs">
+      <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EFRepository\sysdiagrams.cs">
       <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EFRepository\UnosUMagacin.cs">
       <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EFRepository\User.cs">
+      <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EFRepository\UserRole.cs">
+      <DependentUpon>ProdavnicaLaptopovaModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Interfaces\IAuthRepository.cs" />
     <Compile Include="Models\Interfaces\ILaptop.cs" />
     <Compile Include="Models\Interfaces\IRacun.cs" />
     <Compile Include="Models\KorisnikBO.cs" />
@@ -174,6 +183,8 @@
     <Compile Include="Models\MagacinBO.cs" />
     <Compile Include="Models\RacunBO.cs" />
     <Compile Include="Models\UnosUMagacin.cs" />
+    <Compile Include="Models\UserBO.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +244,8 @@
     <Content Include="Views\Laptop\Edit.cshtml" />
     <Content Include="Views\Laptop\Add.cshtml" />
     <Content Include="Views\Laptop\Racun.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

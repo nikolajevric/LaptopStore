@@ -15,20 +15,20 @@ namespace ProdavnicaLaptopova.Models.EFRepository
 using System;
     using System.Collections.Generic;
     
-public partial class Magacin
+public partial class UserRole
 {
 
-    public int LaptopID { get; set; }
+    public int UserRoleID { get; set; }
 
-    public int UnosUMagacinID { get; set; }
+    public Nullable<int> UserID { get; set; }
 
-    public int Kolicina { get; set; }
+    public Nullable<int> RoleID { get; set; }
 
 
 
-    public virtual Laptop Laptop { get; set; }
+    public virtual Role Role { get; set; }
 
-    public virtual UnosUMagacin UnosUMagacin { get; set; }
+    public virtual User User { get; set; }
 
 }
 
